@@ -95,7 +95,6 @@ mongoose.connect(
 
   // Below to connect nodjs with mongodb in network with credentials
   "mongodb://lokesh:secret@mongodb:27017/course-goals?authSource=admin",
-
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
