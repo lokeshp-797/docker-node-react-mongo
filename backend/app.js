@@ -84,9 +84,14 @@ app.delete("/goals/:id", async (req, res) => {
 });
 
 mongoose.connect(
+  // Below to connect mongodb from nodejs without docker
   // 'mongodb://localhost:27017/course-goals',
-  "mongodb://host.docker.internal:27017/course-goals",
 
+  // Below to connect nodejs with mongodb docker container
+  // "mongodb://host.docker.internal:27017/course-goals",
+
+  // Below to connect nodejs with mongodb in network
+  "mongodb://mongodb:27017/course-goals",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
