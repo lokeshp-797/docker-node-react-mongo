@@ -91,7 +91,11 @@ mongoose.connect(
   // "mongodb://host.docker.internal:27017/course-goals",
 
   // Below to connect nodejs with mongodb in network
-  "mongodb://mongodb:27017/course-goals",
+  // "mongodb://mongodb:27017/course-goals",
+
+  // Below to connect nodjs with mongodb in network with credentials
+  "mongodb://lokesh:secret@mongodb:27017/course-goals?authSource=admin",
+
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
