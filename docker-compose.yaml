@@ -1,0 +1,65 @@
+# Mongodb
+# Docker run –name mongodb -v data:/data/db –rm -d –network goals-net mongo
+
+# Backend
+
+# docker run --name goals-backend \
+#   -v /Users/lokeshpujari/Downloads/Github-myprojects/docker-node-react-mongo/backend:/app \
+#   -v logs:/app/logs \
+#   -v /app/node_modules \
+#   --rm -p 80:80 \
+#   --network goals-net \
+#   goals-node
+
+# Frontend
+
+# docker run -it --rm \
+#   --name goals-frontend \
+#   -v <path-to-src>:/app/src \
+#   -p 3000:3000 \
+#   goals-react
+
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    # container_name: mongodb
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: lokesh
+    #   MONGO_INITDB_ROOT_PASSWORD: secret
+
+    # env_file:
+    #  - ./env/mongo.env
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    # env_file:
+    #   - ./env/backend.env
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+# named volumes should be specified like below
+volumes:
+  data:
+  logs:
