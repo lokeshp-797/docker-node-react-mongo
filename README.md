@@ -47,7 +47,8 @@ Udemy_Devops Progress
 Docs Link:
 https://docs.google.com/document/d/16DMON_Xe5pSr3qlZfvXryJCNnSKJCHD_6A9KQaGBkmA/edit?tab=t.irubio7wzg2r
 
-
+Local File Link:
+Downloads/Solugenix_Udemy
 
 Additional commands:
 docker ps -a
