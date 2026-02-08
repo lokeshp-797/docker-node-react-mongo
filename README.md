@@ -39,6 +39,16 @@ Main Commands used:
 
 We see now all the containers are communicating with each other using localhost using [localhost:](http://localhost:3000/)
 
+
+For using volumes and data persistence use below code:
+Location: 
+GoogleDocs
+Udemy_Devops Progress
+Docs Link:
+https://docs.google.com/document/d/16DMON_Xe5pSr3qlZfvXryJCNnSKJCHD_6A9KQaGBkmA/edit?tab=t.irubio7wzg2r
+
+
+
 Additional commands:
 docker ps -a
 docker images
