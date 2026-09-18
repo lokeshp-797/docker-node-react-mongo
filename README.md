@@ -81,3 +81,32 @@ docker images
 docker stop <containerid>
 docker rm <containerid>
 docker rmi <imageid>
+
+=======================
+Another option
+Can also run the docker compose file
+
+Docker Compose
+
+Create a docker-compose.yaml file in the root folder
+
+No need to creating network in compose file. Docker itself creates all the resources together once everything is there in compose file
+
+Delete all the images locally
+Docker image prune
+Docker image prune -a
+
+Docker compose up
+
+Docker compose down
+
+Docker compose down -v => to delete the volumes
+
+Docker compose up -d => to start in detach mode
+
+Docker logs <backend containername> => we can see that its connected to mongodb
+
+Now we can see it working from UI
+
+To build only the images:
+Docker-compose build => this will not start container
