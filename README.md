@@ -1,3 +1,6 @@
+Reference commands:
+https://docs.google.com/document/d/16DMON_Xe5pSr3qlZfvXryJCNnSKJCHD_6A9KQaGBkmA/edit?tab=t.irubio7wzg2r
+
 # docker-node-react-mongo
 
 Using docker to deploy three containers of Node(backend), React(frontend), Mongo(database)
@@ -6,19 +9,39 @@ Follow all the steps to make sure frontend, backend, database are connected and 
 
 Main Commands used:
 
-1.  First try connecting Frontend, Backend, mongodb locally
-    Check if all individual are connecting together properly
+1.  First try connecting Frontend, Backend, mongodb locally in system
+    Check if all individual are connecting together properly using network
+
+    Reference:
+    https://github.com/lokeshp-797/steps-react-node-mongodb
+
+Create docker networking to make sure UI, Backend, DB communicate effectively:
+
+Docker network ls
+Docker network create goals-net
 
 2.  ---- Dockerizing mongodb (Database) ----
-    Docker run --name mongodb --rm -d-p 27017:27017 mongo
+    Run Mongodb in network:
+    docker run --name mongodb --rm -d --network goals-net mongo
 
-    Run node app.js locally which should connect to mongodb automatically
+        <!-- docker run --name mongodb --rm -d -p 27017:27017 mongo -->
 
-    Check from UI if entire connectivity is working fine
+        Run node app.js locally which should connect to mongodb automatically
+
+        Check from UI if entire connectivity is working fine
 
 3.  ---- Dockerizing Nodejs (Backend) ----
     Create docker file for Nodejs
 
+    Build image of nodejs again
+    Docker build -t goals-node .
+
+    Run the container in network
+    docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+
+    <!-- docker run --name goals-backend --rm -d --network goals-net goals-node -->
+
+    Local testing:
     Make changes to code below in app.js
     'mongodb://host.docker.internal:27017/course-goals'
 
@@ -26,22 +49,24 @@ Main Commands used:
     docker build -t goals-node .
 
     Run Nodejs container:
-    Docker run --name goals-backend --rm -p 80:80 goals-node
+    docker run --name goals-backend --rm -p 80:80 goals-node
 
     Now nodejs should able to connect with Mongodb
 
 4.  ----- Dockerizing Reactjs (Frontend) ----
-    Build image
-    Docker build -t goals-react .
+    Build image:
+    docker build -t goals-react .
+
+    Run reactjs container in network:
+    docker run --name goals-frontend --network goals-net --rm -p 3000:3000 -it goals-react
 
     Run the docker reactjs container in interactive mode:
-    Docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
+    docker run --name goals-frontend --rm -p 3000:3000 -it goals-react
 
 We see now all the containers are communicating with each other using localhost using [localhost:](http://localhost:3000/)
 
-
 For using volumes and data persistence use below code:
-Location: 
+Location:
 GoogleDocs
 Udemy_Devops Progress
 Docs Link:
